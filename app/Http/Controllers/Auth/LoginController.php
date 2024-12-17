@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -38,5 +40,35 @@ class LoginController extends Controller
         $this->middleware('auth')->only('logout');
     }
 
-    
+    public function login(Request $request)
+    {
+        $input = $request->all();
+
+        $this->validate($request, [
+            'email' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string', 'min:8'],
+        ]);
+
+        $credentials = [
+            'email' => $input['email'],
+            'password' => $input['password'],
+        ];
+
+        if (auth()->attempt($credentials)) {
+            $user = auth()->user();
+                if (auth()->user()->role == 'penjual') {
+                    alert()->toast('Welcome <b>' . $user->penjual->name . '</b>, you have been successfully logged in!', 'success')->position('top-end');
+                    return redirect()->route('home');
+            } else {
+                // Cek apakah username ada dalam database
+                $user = User::where('email', $input['email'])->first();
+                if ($user) {
+                    alert()->toast('Email dan Password anda salah', 'error')->position('top-end');
+                } else {
+                    alert()->toast('Akun Anda Tidak Ditemukan, Silakan Anda Daftar Dahulu', 'error')->position('top-end');
+                }
+                return redirect()->route('login');
+            }
+        }
+    }
 }

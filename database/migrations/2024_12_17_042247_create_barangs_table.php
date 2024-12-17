@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nama_barang');
             $table->integer('stok_barang');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('jenis_barang_id')->references('id')->on('jenis_barangs')->onDelete('cascade');
         });

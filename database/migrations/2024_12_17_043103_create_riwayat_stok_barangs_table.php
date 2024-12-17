@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('stok');
             $table->date('tanggal_stok');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('barang_id')->references('id')->on('barangs')->onDelete('cascade');
         });

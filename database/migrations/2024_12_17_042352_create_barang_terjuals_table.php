@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('jumlah_terjual');
             $table->date('tanggal_transaksi');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('barang_id')->references('id')->on('barangs')->onDelete('cascade');
         });

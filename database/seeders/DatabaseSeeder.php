@@ -4,9 +4,12 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\JenisBarang;
 use App\Models\Penjual;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,5 +36,53 @@ class DatabaseSeeder extends Seeder
                 'user_id' => $user->id,
             ]);
         }
+        $konsumsi = JenisBarang::create([
+            'jenis_barang' => 'Konsumsi',
+        ]);
+        $pembersih = JenisBarang::create([
+            'jenis_barang' => 'Pembersih',
+        ]);
+
+         // Data barang
+         $data = [
+            [
+                'jenis_barang_id' => $konsumsi->id, // Konsumsi
+                'nama_barang' => 'Kopi',
+                'stok_barang' => 100,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'jenis_barang_id' => $konsumsi->id, // Konsumsi
+                'nama_barang' => 'Teh',
+                'stok_barang' => 100,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'jenis_barang_id' => $pembersih->id, // Pembersih
+                'nama_barang' => 'Pasta Gigi',
+                'stok_barang' => 100,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'jenis_barang_id' => $pembersih->id, // Pembersih
+                'nama_barang' => 'Sabun Mandi',
+                'stok_barang' => 100,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'jenis_barang_id' => $pembersih->id, // Pembersih
+                'nama_barang' => 'Sampo',
+                'stok_barang' => 100,
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+        ];
+
+        // Insert data ke tabel 'barangs'
+        DB::table('barangs')->insert($data);
     }
 }
