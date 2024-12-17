@@ -45,5 +45,6 @@ Route::middleware(['auth', 'user-access:penjual'])->group(function () {
     Route::post('penjual/barang-terjual', [BarangTerjualController::class, 'store'])->name('Penjual.barang-terjual.store');
     Route::put('penjual/barang-terjual/{id}', [BarangTerjualController::class, 'update'])->name('Penjual.barang-terjual.update');
     Route::delete('penjual/barang-terjual/{id}', [BarangTerjualController::class, 'destroy'])->name('Penjual.barang-terjual.destroy');
+    Route::post('filter/barang-terjual', [BarangTerjualController::class, 'filter'])->name('Penjual.barang-terjual.filter');
 
 });

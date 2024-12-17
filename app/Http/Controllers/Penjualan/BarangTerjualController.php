@@ -10,16 +10,19 @@ use App\Models\RiwayatStokBarang;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\DB;
 
 class BarangTerjualController extends Controller
 {
     public function index(){
         $barangTerjual = BarangTerjual::all();
         $barang = Barang::all();
+        $jenisbarang = JenisBarang::all();
 
         $data = [
             'barangTerjual'  => $barangTerjual,
             'barang'  => $barang,
+            'jenisBarang'  => $jenisbarang,
 
         ];
         return view('penjual.penjualan barang.index', $data);
@@ -115,4 +118,65 @@ class BarangTerjualController extends Controller
         }
         return redirect()->route('Penjual.barang-terjual.index');
     }
+
+    public function filter(Request $request)
+    {
+        $request->validate([
+            'filterdateawal' => 'nullable|date',
+            'filterdateakhir' => 'nullable|date',
+            'jenis_barang_id' => 'nullable|exists:jenis_barangs,id',
+            'rendah_banyak' => 'nullable|in:rendah,banyak',
+        ]);
+
+        return DB::transaction(function () use ($request) {
+            $datefrom = $request->input('filterdateawal');
+            $dateto = $request->input('filterdateakhir');
+            $jenis_barang_id = $request->input('jenis_barang_id');
+            $rendah_banyak = $request->input('rendah_banyak');
+
+            $query = BarangTerjual::query();
+
+            if ($datefrom && $dateto) {
+                $query->whereBetween('tanggal_transaksi', [$datefrom, $dateto]);
+            } elseif ($datefrom) {
+                $query->whereDate('tanggal_transaksi', '>=', $datefrom);
+            } elseif ($dateto) {
+                $query->whereDate('tanggal_transaksi', '<=', $dateto);
+            }
+
+            if ($jenis_barang_id) {
+                $query->whereHas('barang', function ($q) use ($jenis_barang_id) {
+                    $q->where('jenis_barang_id', $jenis_barang_id);
+                });
+            }
+
+            if ($rendah_banyak) {
+                if ($rendah_banyak == 'rendah') {
+                    $query->whereHas('barang', function ($q) {
+                        $q->where('jumlah_terjual', '<', 10);
+                    });
+                }
+
+                elseif ($rendah_banyak == 'banyak') {
+                    $query->whereHas('barang', function ($q) {
+                        $q->where('jumlah_terjual', '>=', 10);
+                    });
+                }
+            }
+
+            // Ambil data yang sudah difilter
+            $filter = $query->get();
+
+            return back()->with([
+                'filtering' => $filter,
+                'messages' => 'Data berhasil difilter',
+                'status' => 'success',
+                'datefrom' => $datefrom,
+                'dateto' => $dateto,
+                'jenis_barang_id' => $jenis_barang_id,
+                'rendah_banyak' => $rendah_banyak,
+            ]);
+        });
+    }
+
 }
