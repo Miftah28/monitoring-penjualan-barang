@@ -44,37 +44,37 @@ class DatabaseSeeder extends Seeder
         ]);
 
          // Data barang
-         $data = [
+        $dataBarang = [
             [
-                'jenis_barang_id' => $konsumsi->id, // Konsumsi
+                'jenis_barang_id' => $konsumsi->id,
                 'nama_barang' => 'Kopi',
                 'stok_barang' => 100,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'jenis_barang_id' => $konsumsi->id, // Konsumsi
+                'jenis_barang_id' => $konsumsi->id,
                 'nama_barang' => 'Teh',
                 'stok_barang' => 100,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'jenis_barang_id' => $pembersih->id, // Pembersih
+                'jenis_barang_id' => $pembersih->id,
                 'nama_barang' => 'Pasta Gigi',
                 'stok_barang' => 100,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'jenis_barang_id' => $pembersih->id, // Pembersih
+                'jenis_barang_id' => $pembersih->id,
                 'nama_barang' => 'Sabun Mandi',
                 'stok_barang' => 100,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                'jenis_barang_id' => $pembersih->id, // Pembersih
+                'jenis_barang_id' => $pembersih->id,
                 'nama_barang' => 'Sampo',
                 'stok_barang' => 100,
                 'created_at' => Carbon::now(),
@@ -82,7 +82,59 @@ class DatabaseSeeder extends Seeder
             ],
         ];
 
+        DB::table('barangs')->insert($dataBarang);
+
+         // Data riwayat stok barang
+        $dataRiwayatBarang = [
+            [
+                'barang_id' => 1,
+                'nama_barang' => 'Kopi',
+                'stok' => 100,
+                'status' => 'Penambahan Barang Dan Stok Barang',
+                'tanggal_stok' => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'barang_id' => 2,
+                'nama_barang' => 'Teh',
+                'stok' => 100,
+                'status' => 'Penambahan Barang Dan Stok Barang',
+                'tanggal_stok' => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'barang_id' => 3,
+                'nama_barang' => 'Pasta Gigi',
+                'stok' => 100,
+                'status' => 'Penambahan Barang Dan Stok Barang',
+                'tanggal_stok' => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'barang_id' => 4,
+                'nama_barang' => 'Sabun Mandi',
+                'stok' => 100,
+                'status' => 'Penambahan Barang Dan Stok Barang',
+                'tanggal_stok' => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+            [
+                'barang_id' => 5,
+                'nama_barang' => 'Sampo',
+                'stok' => 100,
+                'status' => 'Penambahan Barang Dan Stok Barang',
+                'tanggal_stok' => Carbon::now(),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ],
+
+        ];
+
         // Insert data ke tabel 'barangs'
-        DB::table('barangs')->insert($data);
+        DB::table('riwayat_stok_barangs')->insert($dataRiwayatBarang);
     }
 }

@@ -16,7 +16,8 @@ class BarangTerjual extends Model
     protected $fillable = [
         'barang_id',
         'jumlah_terjual',
-        'tanggal_transaki',
+        'stok_sebelumnya',
+        'tanggal_transaksi',
     ];
     public function barang()
     {

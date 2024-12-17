@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('riwayat_stok_barangs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('barang_id');
+            $table->string('nama_barang');
             $table->integer('stok');
             $table->date('tanggal_stok');
+            $table->string('status');
             $table->timestamps();
             $table->softDeletes();
 

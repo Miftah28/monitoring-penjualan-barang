@@ -38,6 +38,7 @@ Route::middleware(['auth', 'user-access:penjual'])->group(function () {
     Route::get('penjual/barang', [BarangController::class, 'index'])->name('Penjual.barang.index');
     Route::post('penjual/barang', [BarangController::class, 'store'])->name('Penjual.barang.store');
     Route::put('penjual/barang/{id}', [BarangController::class, 'update'])->name('Penjual.barang.update');
+    Route::put('penjual/barang/tambah-stok/{id}', [BarangController::class, 'tambahStokBarang'])->name('Penjual.barang.tambahStok');
     Route::delete('penjual/barang/{id}', [BarangController::class, 'destroy'])->name('Penjual.barang.destroy');
     //  kelola barang terjual
     Route::get('penjual/barang-terjual', [BarangTerjualController::class, 'index'])->name('Penjual.barang-terjual.index');

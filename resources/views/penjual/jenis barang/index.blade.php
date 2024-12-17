@@ -63,6 +63,6 @@
         </div>
     </section>
 
-    @include('penjual.stok barang.modal')
+    @include('penjual.jenis barang.modal')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     @endsection

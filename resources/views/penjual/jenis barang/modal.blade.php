@@ -32,10 +32,10 @@
 <!-- edit jenis barang -->
 @foreach ($jenisBarang as $jenisBarangs )
 <div class="modal fade" id="edit{{$jenisBarangs->id}}" tabindex="-1" data-bs-backdrop="false">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edit Kategori Sampah</h5>
+                <h5 class="modal-title">Edit Jenis Barang</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

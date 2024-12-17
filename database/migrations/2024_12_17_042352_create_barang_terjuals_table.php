@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('barang_id');
             $table->integer('jumlah_terjual');
+            $table->integer('stok_sebelumnya');
             $table->date('tanggal_transaksi');
             $table->timestamps();
             $table->softDeletes();

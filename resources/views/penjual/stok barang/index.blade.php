@@ -44,17 +44,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($jenisBarang as $jenisBarangs)
+                            @forelse ($barang as $barangs)
                             <tr>
                                 <td scope="row">{{ $loop->iteration }}</td>
 
-                                    <td class="text-center">{{$jenisBarangs->nama_barang}}</td>
-                                    <td class="text-center">{{$jenisBarangs->stok_barang}}</td>
-                                    <td class="text-center">{{$jenisBarangs->JenisBarang->jenis_barang}}</td>
+                                    <td class="text-center">{{$barangs->nama_barang}}</td>
+                                    <td class="text-center">{{$barangs->stok_barang}}</td>
+                                    <td class="text-center">{{$barangs->jenisBarang->jenis_barang}}</td>
                                     <td class="text-center">
-                                        <a href="#plus{{ $jenisBarangs->id }}" data-bs-toggle="modal" class="btn btn-primary"><i class="bi bi-plus"></i></a>
-                                        <a href="#edit{{ $jenisBarangs->id }}" data-bs-toggle="modal" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
-                                        <a href="#delete{{ $jenisBarangs->id }}" data-bs-toggle="modal"
+                                        <a href="#plus{{ $barangs->id }}" data-bs-toggle="modal" class="btn btn-primary"><i class="bi bi-plus"></i></a>
+                                        <a href="#edit{{ $barangs->id }}" data-bs-toggle="modal" class="btn btn-warning"><i class="bi bi-pencil-square"></i></a>
+                                        <a href="#delete{{ $barangs->id }}" data-bs-toggle="modal"
                                             class="btn btn-danger"><i class="bi bi-trash"></i></a>
                                     </td>
                             </tr>

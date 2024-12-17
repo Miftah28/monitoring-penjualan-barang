@@ -15,11 +15,13 @@ class RiwayatStokBarang extends Model
     protected $dates = ['deleted_at'];
     protected $fillable = [
         'barang_id',
-        'jumlah_terjual',
-        'tanggal_transaki',
+        'stok',
+        'tanggal_stok',
+        'nama_barang',
+        'status',
     ];
-    public function barang()
+    public function barangStok()
     {
-        return $this->belongsTo('App\Models\Barang');
+        return $this->belongsTo(Barang::class, 'barang_id');
     }
 }
